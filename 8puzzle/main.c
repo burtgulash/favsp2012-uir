@@ -25,7 +25,7 @@ static void get_positions()
 }
 
 
-int main()
+int main(int argc, char **argv)
 {
     Grid *cur, *child, *iter, **result;
     Pqueue *pq;
@@ -33,6 +33,14 @@ int main()
     int goal_grid_code, child_code;
     int i, ch;
     int path_length;
+    int verbose;
+
+    verbose = 0;
+    while (--argc) {
+        argv++;
+        if (argv[0][0] == '-' && argv[0][1] == 'v')
+            verbose = 1;
+    }
 
     root = (Grid *) malloc(sizeof(Grid));
     memcpy(root->g, start, sizeof(int) * 9);
@@ -46,6 +54,7 @@ int main()
     goal_grid_code = grid_code(goal);
 
     path_length = 0;
+    i = 0;
     pq = pqueue_new();
     visited = set_new(4);
     pqueue_insert(pq, root);
@@ -54,6 +63,14 @@ int main()
 
     while (!empty(pq)) {
         cur = pqueue_extract_min(pq);
+        if (verbose) {
+            printf("----------------\n");
+            grid_print(cur);
+            printf("Step   : %d\n", ++i);
+            grid_details(cur);
+            printf("----------------\n");
+            printf("\n");
+        }
         if (grid_code(cur) == goal_grid_code)
             break;
 
@@ -108,6 +125,9 @@ int main()
     i = path_length - 1;
     for (iter = cur; iter != NULL; iter = iter->parent)
         result[i--] = iter;
+
+    if (verbose)
+        printf("Solution sequence:\n");
 
     for (i = 0; i < path_length; i++)
         grid_print(result[i]);

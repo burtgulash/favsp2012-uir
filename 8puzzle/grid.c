@@ -91,6 +91,7 @@ Grid *make_child(Grid *grid)
     child->depth = grid->depth + 1;
     child->hole = grid->hole;
     child->parent = grid;
+    child->child[0] = NULL;
 
     for (i = 0; i < 9; i++)
         child->g[i] = grid->g[i];
@@ -122,9 +123,20 @@ void grid_print(Grid *grid)
 {
     int i, j;
     for (i = 0; i < 3; i++) {
-        for (j = 0; j < 3; j++)
-            printf("%d ", grid->g[3 * i + j]);
+        for (j = 0; j < 3; j++) {
+            if (grid->g[3 * i + j] == 0)
+                printf("  ");
+            else
+                printf("%d ", grid->g[3 * i + j]);
+        }
         printf("\n");
     }
     printf("\n");
+}
+
+
+void grid_details(Grid *grid)
+{
+    printf("Depth  : %d\n", grid->depth);
+    printf("Weight : %d\n", weight(grid));
 }
