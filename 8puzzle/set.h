@@ -3,9 +3,9 @@
 #include "list.h"
 
 typedef struct _set {
-	int num_elems;
-	int size;
-	List **buckets;
+    int num_elems;
+    int size;
+    List **buckets;
 } Set;
 
 int set_contains(Set *s, int position);

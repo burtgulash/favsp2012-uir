@@ -6,18 +6,29 @@
 
 int main()
 {
-	Set *s;
-	int i;
+    Set *s;
+    List *l;
+    int i;
 
-	s = set_new();
-	set_insert(s, 31);
-	set_insert(s, 4);
-	set_insert(s, 1337);
+    s = set_new(2);
+    set_insert(s, 31);
+    set_insert(s, 31);
+    set_insert(s, 310);
+    set_insert(s, 32);
+    set_insert(s, 4);
+    set_insert(s, 1337);
+    set_insert(s, 2337);
 
-	for (i = 0; i < 2000; i++)
-		if (set_contains(s, i))
-			printf("%d\n", i);
-	set_dispose(s);
+    for (i = 0; i < s->size; i++) {
+        l = s->buckets[i];
+        if (l != NULL) {
+            for (l = s->buckets[i]->next; l != NULL; l=l->next)
+                printf("%d, ", l->position);
+        }
+        printf("\n");
+    }
+    printf("size: %d\n", s->size);
+    set_dispose(s);
 
-	return 0;
+    return 0;
 }

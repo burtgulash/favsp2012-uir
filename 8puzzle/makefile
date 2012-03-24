@@ -1,5 +1,5 @@
 CC = gcc
-CCFLAGS = -Wall -pedantic -ansi
+CCFLAGS = -g -Wall -pedantic -ansi
 
 EXEC = 8puzzle
 SRCS = set.c list.c main.c

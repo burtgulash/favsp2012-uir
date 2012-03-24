@@ -2,8 +2,8 @@
 #define LIST_H
 
 typedef struct _list {
-	int position;
-	struct _list *next;
+    int position;
+    struct _list *next;
 } List;
 
 int list_contains(List *l, int position);
