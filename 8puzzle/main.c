@@ -27,11 +27,12 @@ static void get_positions()
 
 int main()
 {
-    Grid *cur, *child;
+    Grid *cur, *child, *iter, **result;
     Pqueue *pq;
     Set *visited;
     int goal_grid_code, child_code;
-    int ch;
+    int i, ch;
+    int path_length;
 
     memcpy(root.g, start, sizeof(int) * 9);
     root.parent = NULL;
@@ -39,15 +40,15 @@ int main()
     root.depth = 0;
     get_positions();
 
-grid_print(&root);
-
     memcpy(goal.g, end, sizeof(int) * 9);
     goal_grid_code = grid_code(&goal);
 
+    path_length = 0;
     pq = pqueue_new();
     visited = set_new(4);
     pqueue_insert(pq, &root);
     set_insert(visited, grid_code(&root));
+
 
     while (!empty(pq)) {
         cur = pqueue_extract_min(pq);
@@ -88,12 +89,27 @@ grid_print(&root);
             grid_move_hole(child, child->hole + 3);
             ADD_CHILD();
         }
+#undef ADD_CHILD
 
         /* End of children character. */
         cur->child[ch] = NULL;
     }
 
-#undef ADD_CHILD
+    /* Collect result path. */
+    for (iter = cur; iter != NULL; iter = iter->parent)
+        path_length ++;
+
+    result = (Grid**) malloc(sizeof(Grid*) * path_length);
+
+    i = path_length - 1;
+    for (iter = cur; iter != NULL; iter = iter->parent)
+        result[i--] = iter;
+
+    for (i = 0; i < path_length; i++)
+        grid_print(result[i]);
+
+
+    free(result);
 
     return 0;
 }
