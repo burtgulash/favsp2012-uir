@@ -6,8 +6,9 @@ typedef struct _list {
 	struct _list *next;
 } List;
 
-int list_contains(List l, int position);
-void list_insert(List l, int position);
-void list_dispose(List l);
+int list_contains(List *l, int position);
+void list_insert(List *l, int position);
+List *list_new(int position, List *next);
+void list_dispose(List *l);
 
 #endif
