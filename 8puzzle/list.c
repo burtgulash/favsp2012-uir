@@ -23,7 +23,7 @@ void list_insert(List *l, int position)
 List *list_new(int position, List *next)
 {
     List *new;
-    
+
     new = (List *) malloc(sizeof(List));
     new->position = position;
     new->next = next;

@@ -14,7 +14,7 @@ static void copy_over(Set *old, Set *new)
 
     for (i = 0; i < old->size; i++) {
         l = old->buckets[i];
-        if (l != NULL) 
+        if (l != NULL)
             for (l = l->next; l != NULL; l = l->next)
                 set_insert(new, l->position);
     }
@@ -30,7 +30,7 @@ int set_contains(Set *s, int position)
 
     if (list == NULL)
         return 0;
-    
+
     return list_contains(list, position);
 }
 
@@ -45,7 +45,7 @@ void set_insert(Set *s, int position)
         copy_over(s, tmp);
 
         dispose_buckets(s);
-        
+
         s->num_elems = tmp->num_elems;
         s->size = tmp->size;
         s->buckets = tmp->buckets;
