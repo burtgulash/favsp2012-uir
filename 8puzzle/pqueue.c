@@ -5,6 +5,7 @@
 
 static int weight(Grid *g)
 {
+    /* TODO weight function. */
     return (int) *g;
 }
 

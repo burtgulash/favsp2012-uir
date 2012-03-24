@@ -10,6 +10,6 @@ typedef struct _set {
 
 int set_contains(Set *s, int position);
 void set_insert(Set *s, int position);
-Set *set_new();
+Set *set_new(int size);
 void set_dispose(Set *s);
 #endif
