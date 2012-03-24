@@ -4,7 +4,6 @@
 #include "grid.h"
 
 
-Grid root, goal;
 int correct_position[9];
 
 /*
@@ -81,6 +80,7 @@ int weight(Grid *grid)
     return g + P + 3 * Q;
 }
 
+
 Grid *make_child(Grid *grid)
 {
     Grid *child;
@@ -96,6 +96,17 @@ Grid *make_child(Grid *grid)
         child->g[i] = grid->g[i];
 
     return child;
+}
+
+
+void grid_dispose(Grid *grid)
+{
+    int ch;
+
+    for (ch = 0; grid->child[ch] != NULL; ch++)
+        grid_dispose(grid->child[ch]);
+
+    free(grid);
 }
 
 

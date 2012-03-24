@@ -12,6 +12,7 @@ typedef struct _grid {
 void grid_print(Grid *grid);
 void grid_move_hole(Grid *grid, int new_pos);
 Grid *make_child(Grid *grid);
+void grid_dispose(Grid *grid);
 int grid_code(Grid *grid);
 int weight(Grid *grid);
 

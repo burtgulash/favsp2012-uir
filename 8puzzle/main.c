@@ -13,7 +13,7 @@ static int end[]   = {1, 2, 3,
                       8, 0, 4,
                       7, 6, 5};
 
-extern Grid goal, root;
+Grid *goal, *root;
 extern int correct_position[9], next_position[9];
 
 static void get_positions()
@@ -21,7 +21,7 @@ static void get_positions()
     int i;
 
     for (i = 0; i < 9; i++)
-        correct_position[root.g[i]] = i;
+        correct_position[root->g[i]] = i;
 }
 
 
@@ -34,20 +34,22 @@ int main()
     int i, ch;
     int path_length;
 
-    memcpy(root.g, start, sizeof(int) * 9);
-    root.parent = NULL;
-    root.hole = 1;
-    root.depth = 0;
+    root = (Grid *) malloc(sizeof(Grid));
+    memcpy(root->g, start, sizeof(int) * 9);
+    root->parent = NULL;
+    root->hole = 1;
+    root->depth = 0;
     get_positions();
 
-    memcpy(goal.g, end, sizeof(int) * 9);
-    goal_grid_code = grid_code(&goal);
+    goal = (Grid *) malloc(sizeof(Grid));
+    memcpy(goal->g, end, sizeof(int) * 9);
+    goal_grid_code = grid_code(goal);
 
     path_length = 0;
     pq = pqueue_new();
     visited = set_new(4);
-    pqueue_insert(pq, &root);
-    set_insert(visited, grid_code(&root));
+    pqueue_insert(pq, root);
+    set_insert(visited, grid_code(root));
 
 
     while (!empty(pq)) {
@@ -63,8 +65,10 @@ int main()
         set_insert(visited, child_code);                                      \
         pqueue_insert(pq, child);                                             \
         cur->child[ch++] = child;                                             \
-    }                                                                         \
+    } else                                                                    \
+        free(child);                                                          \
 }
+
         /* Hole not on the left wall. */
         if (cur->hole % 3 > 0) {
             child = make_child(cur);
@@ -109,7 +113,12 @@ int main()
         grid_print(result[i]);
 
 
+    /* Clean up. */
+    grid_dispose(root);
+    set_dispose(visited);
+    pqueue_dispose(pq);
     free(result);
+    free(goal);
 
     return 0;
 }
