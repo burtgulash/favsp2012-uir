@@ -1,4 +1,3 @@
-#include <assert.h>
 #include <stdlib.h>
 
 #include "pqueue.h"
@@ -21,8 +20,6 @@ static void swap(Pqueue *pq, int pos1, int pos2)
 
 static void up(Pqueue *pq, int pos)
 {
-    assert (pos < pq->used);
-
     while (pos > 1
         && weight(pq->elems[pos]) < weight(pq->elems[pos / 2])) {
         swap(pq, pos, pos / 2);
@@ -35,8 +32,6 @@ static void down(Pqueue *pq, int pos)
 {
     int next;
     Grid **elems;
-
-    assert (pos < pq->used);
 
     elems = pq->elems;
     next = pos * 2;
@@ -74,8 +69,8 @@ Grid *pqueue_extract_min(Pqueue *pq)
     min = pq->elems[1];
 
     pq->elems[1] = pq->elems[pq->used - 1];
-    down(pq, 1);
     pq->used--;
+    down(pq, 1);
 
     return min;
 }

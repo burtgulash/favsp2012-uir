@@ -73,7 +73,7 @@ printf("allo: %d\n", pq->alloc);
     }
     printf("\n");
 
-	pqueue_dispose(pq);
+    pqueue_dispose(pq);
 
 
     return 0;
