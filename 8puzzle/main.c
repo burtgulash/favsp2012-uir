@@ -1,21 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "set.h"
 #include "list.h"
 
 int main()
 {
-	List *l, *ll;
+	Set *s;
+	int i;
 
-	l = list_new(0, NULL);
-	list_insert(l, -137);
-	list_insert(l, 1337);
-	list_insert(l, 137);
-	list_insert(l, 137);
-	
-	for (ll = l; ll != NULL; ll = ll->next)
-		printf("%d, ", ll->position);
-	list_dispose(l);
+	s = set_new();
+	set_insert(s, 31);
+	set_insert(s, 4);
+	set_insert(s, 1337);
+
+	for (i = 0; i < 2000; i++)
+		if (set_contains(s, i))
+			printf("%d\n", i);
+	set_dispose(s);
 
 	return 0;
 }

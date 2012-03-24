@@ -8,7 +8,8 @@ typedef struct _set {
 	List **buckets;
 } Set;
 
-int set_contains(Set s, int position);
-void set_insert(Set s, int position);
-void set_dispose(Set s);
+int set_contains(Set *s, int position);
+void set_insert(Set *s, int position);
+Set *set_new();
+void set_dispose(Set *s);
 #endif
