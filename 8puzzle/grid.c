@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "grid.h"
 
 
@@ -76,4 +79,41 @@ int weight(Grid *grid)
     Q = order_violation(grid);
 
     return g + P + 3 * Q;
+}
+
+Grid *make_child(Grid *grid)
+{
+    Grid *child;
+    int i;
+
+    child = (Grid*) malloc(sizeof(Grid));
+
+    child->depth = grid->depth + 1;
+    child->hole = grid->hole;
+    child->parent = grid;
+
+    for (i = 0; i < 9; i++)
+        child->g[i] = grid->g[i];
+
+    return child;
+}
+
+
+void grid_move_hole(Grid *grid, int new_pos)
+{
+    grid->g[grid->hole] = grid->g[new_pos];
+    grid->g[new_pos] = 0;
+    grid->hole = new_pos;
+}
+
+
+void grid_print(Grid *grid)
+{
+    int i, j;
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++)
+            printf("%d ", grid->g[3 * i + j]);
+        printf("\n");
+    }
+    printf("\n");
 }

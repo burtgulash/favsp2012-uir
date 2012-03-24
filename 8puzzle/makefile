@@ -2,7 +2,7 @@ CC = gcc
 CCFLAGS = -g -Wall -pedantic -ansi
 
 EXEC = 8puzzle
-SRCS = set.c list.c pqueue.c main.c
+SRCS = set.c list.c pqueue.c grid.c main.c
 
 
 $(EXEC) : $(SRCS)
