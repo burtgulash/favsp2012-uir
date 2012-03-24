@@ -1,13 +1,8 @@
 #include <stdlib.h>
 
+#include "grid.h"
 #include "pqueue.h"
 
-
-static int weight(Grid *g)
-{
-    /* TODO weight function. */
-    return (int) *g;
-}
 
 static void swap(Pqueue *pq, int pos1, int pos2)
 {

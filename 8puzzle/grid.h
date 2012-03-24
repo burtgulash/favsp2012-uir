@@ -5,7 +5,9 @@ typedef struct _grid {
     int g[9];
     int depth;
     struct _grid *parent;
-    struct _grid *child[5];
 } Grid;
+
+int grid_code(Grid *grid);
+int weight(Grid *grid);
 
 #endif
