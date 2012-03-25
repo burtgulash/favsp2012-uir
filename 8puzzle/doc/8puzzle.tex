@@ -1,0 +1,44 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage{amsmath}
+
+\author{Tomáš Maršálek}
+\title{Semestrální práce z předmětu KIV/UIR}
+\date{\today}
+
+\begin{document}
+\begin{titlepage}
+\maketitle
+\end{titlepage}
+
+\section{Zadání}
+V programovacím jazyce C zpracujte jednoduchý výukový program, který plně
+demonstruje nalezení řešení následující úlohy: Jde o převedení hlavolamu \uv{8}
+(při respektování pořadí aplikace produkčních pravidel uvedeného na přednášce)
+% TODO nějaký pikčůry
+metodou prohledávání grafu s využitím heuristické funkce
+\begin{align*}
+\hat{f}(n_i)~&=~\hat{g}(n_i) + \hat{h}(n_i) \\
+\hat{g}(n_i)~&=~d(n_i)~~~~(d\acute{e}lka~cesty~z~n_0~do~n_i) \\
+\hat{h}(n_i)~&=~P(n_i) + 3 Q(n_i) \\
+\end{align*}
+
+\begin{itemize}
+	\item $P(n_i)$ je součet vzdáleností každého kamene hlavolamu od svého
+          cílového místa (v možných posuvech).
+	\item $Q(n_i)$ je míra porušení pořadí kamenů zahrnutá tak, že
+	\begin{itemize}
+		\item přičítáme hodnotu 2 za každý kámen nenacházející se ve středu
+              pole a jenž není následován správným kamenem,
+		\item za kámen ve středu pole přičítáme 1.
+	\end{itemize}
+\end{itemize}
+
+\section{Analýza problému}
+\section{Implementace}
+\section{Uživatelská příručka}
+\section{Řešení úlohy}
+\section{Závěr}
+
+\end{document}
