@@ -4,7 +4,7 @@
 #include "grid.h"
 
 
-int correct_position[9];
+static int correct_position[9];
 
 /*
  * Next position is a map from grid positions
@@ -14,7 +14,16 @@ int correct_position[9];
  *     3 4 5  --->  4 - 8
  *     6 7 8        3 6 7
  */
-int next_position[9] = {1, 2, 5, 4, -1, 8, 3, 6, 7};
+static int next_position[9] = {1, 2, 5, 4, -1, 8, 3, 6, 7};
+
+
+void get_correct_positions(Grid *goal)
+{
+    int i;
+
+    for (i = 0; i < 9; i++)
+        correct_position[goal->g[i]] = i;
+}
 
 
 /* Get unique id of the grid. */
@@ -42,6 +51,11 @@ static int manhattan_distance(Grid *grid, int pos)
     return dist / 3 + dist % 3;
 }
 
+static int successor(int position)
+{
+    return (position + 1) % 9;
+}
+
 
 static int order_violation(Grid *grid)
 {
@@ -56,7 +70,7 @@ static int order_violation(Grid *grid)
     /* All others have weight 2 upon violation. */
     for (i = 0; i < 9; i++)
         if (i != 4)
-            if (grid->g[i] + 1 != grid->g[next_position[i]])
+            if (successor(grid->g[i]) != grid->g[next_position[i]])
                 v += 2;
 
     return v;

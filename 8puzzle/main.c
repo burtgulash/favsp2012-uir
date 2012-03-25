@@ -14,15 +14,6 @@ static int end[]   = {1, 2, 3,
                       7, 6, 5};
 
 Grid *goal, *root;
-extern int correct_position[9], next_position[9];
-
-static void get_positions()
-{
-    int i;
-
-    for (i = 0; i < 9; i++)
-        correct_position[root->g[i]] = i;
-}
 
 
 int main(int argc, char **argv)
@@ -47,11 +38,11 @@ int main(int argc, char **argv)
     root->parent = NULL;
     root->hole = 1;
     root->depth = 0;
-    get_positions();
 
     goal = (Grid *) malloc(sizeof(Grid));
     memcpy(goal->g, end, sizeof(int) * 9);
     goal_grid_code = grid_code(goal);
+    get_correct_positions(goal);
 
     path_length = 0;
     i = 0;

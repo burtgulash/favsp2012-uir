@@ -9,6 +9,7 @@ typedef struct _grid {
     struct _grid *child[5];
 } Grid;
 
+void get_correct_positions(Grid *goal);
 void grid_print(Grid *grid);
 void grid_details(Grid *grid);
 void grid_move_hole(Grid *grid, int new_pos);
