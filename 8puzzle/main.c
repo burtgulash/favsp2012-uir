@@ -45,11 +45,11 @@ int solve(int *start, int *end, int verbose)
     while (!empty(pq)) {
         cur = pqueue_extract_min(pq);
         if (verbose) {
-            printf("----------------\n");
+            printf("%d.\n", ++i);
+            printf("Depth: %d\n", cur->depth);
+            printf("Grid:\n");
             grid_print(cur);
-            printf("Step   : %d\n", ++i);
-            grid_details(cur);
-            printf("----------------\n");
+            printf("f: %2d\n", weight(cur));
             printf("\n");
         }
         if (grid_code(cur) == goal_grid_code)
@@ -95,10 +95,17 @@ int solve(int *start, int *end, int verbose)
 
         /* End of children character. */
         cur->child[ch] = NULL;
+
+        if (verbose) {
+            printf("Children:\n");
+            grid_children(cur);
+            printf("------------------------\n");
+            printf("\n");
+        }
     }
 
-	if (grid_code(cur) != goal_grid_code)
-		return 0;
+    if (grid_code(cur) != goal_grid_code)
+        return 0;
 
     /* Collect result path. */
     for (iter = cur; iter != NULL; iter = iter->parent)
@@ -113,8 +120,10 @@ int solve(int *start, int *end, int verbose)
     if (verbose)
         printf("Solution sequence:\n");
 
-    for (i = 0; i < path_length; i++)
+    for (i = 0; i < path_length; i++) {
         grid_print(result[i]);
+        printf("\n");
+    }
 
 
     /* Clean up. */

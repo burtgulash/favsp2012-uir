@@ -136,6 +136,7 @@ void grid_move_hole(Grid *grid, int new_pos)
 void grid_print(Grid *grid)
 {
     int i, j;
+
     for (i = 0; i < 3; i++) {
         for (j = 0; j < 3; j++) {
             if (grid->g[3 * i + j] == 0)
@@ -145,12 +146,27 @@ void grid_print(Grid *grid)
         }
         printf("\n");
     }
-    printf("\n");
 }
 
 
-void grid_details(Grid *grid)
+void grid_children(Grid *grid)
 {
-    printf("Depth  : %d\n", grid->depth);
-    printf("Weight : %d\n", weight(grid));
+    int ch, i, j;
+
+    for (i = 0; i < 3; i++) {
+        for (ch = 0; grid->child[ch]; ch++) {
+            for (j = 0; j < 3; j++) {
+                if (grid->child[ch]->g[3 * i + j] == 0)
+                    printf("  ");
+                else
+                    printf("%d ", grid->child[ch]->g[3 * i + j]);
+            }
+            printf("   ");
+        }
+        printf("\n");
+    }
+
+    for (ch = 0; grid->child[ch]; ch++)
+        printf("f: %2d    ", weight(grid->child[ch]));
+    printf("\n");
 }

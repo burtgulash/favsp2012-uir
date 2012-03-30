@@ -11,7 +11,7 @@ typedef struct _grid {
 
 void get_correct_positions(Grid *goal);
 void grid_print(Grid *grid);
-void grid_details(Grid *grid);
+void grid_children(Grid *grid);
 void grid_move_hole(Grid *grid, int new_pos);
 Grid *make_child(Grid *grid);
 void grid_dispose(Grid *grid);
