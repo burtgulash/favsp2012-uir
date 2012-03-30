@@ -13,25 +13,15 @@ static int end[]   = {1, 2, 3,
                       8, 0, 4,
                       7, 6, 5};
 
-Grid *goal, *root;
 
-
-int main(int argc, char **argv)
+int solve(int *start, int *end, int verbose)
 {
-    Grid *cur, *child, *iter, **result;
+    Grid *root, *goal, *cur, *child, *iter, **result;
     Pqueue *pq;
     Set *visited;
     int goal_grid_code, child_code;
     int i, ch;
     int path_length;
-    int verbose;
-
-    verbose = 0;
-    while (--argc) {
-        argv++;
-        if (argv[0][0] == '-' && argv[0][1] == 'v')
-            verbose = 1;
-    }
 
     root = (Grid *) malloc(sizeof(Grid));
     memcpy(root->g, start, sizeof(int) * 9);
@@ -107,6 +97,9 @@ int main(int argc, char **argv)
         cur->child[ch] = NULL;
     }
 
+	if (grid_code(cur) != goal_grid_code)
+		return 0;
+
     /* Collect result path. */
     for (iter = cur; iter != NULL; iter = iter->parent)
         path_length ++;
@@ -131,5 +124,21 @@ int main(int argc, char **argv)
     free(result);
     free(goal);
 
-    return 0;
+    return 1;
+}
+
+
+int main(int argc, char **argv)
+{
+    int verbose;
+
+    verbose = 0;
+    while (--argc) {
+        argv++;
+        if (argv[0][0] == '-' && argv[0][1] == 'v')
+            verbose = 1;
+    }
+
+
+    return !solve(start, end, verbose);
 }
