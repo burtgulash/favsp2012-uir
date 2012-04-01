@@ -35,10 +35,63 @@ metodou prohledávání grafu s využitím heuristické funkce
 	\end{itemize}
 \end{itemize}
 
-\section{Analýza problému}
+
+\section{Analýza úlohy}
+Cílem úlohy je zjistit posloupnost tahů, která řeší výše uvedený hlavolam.  Při
+hledání jednotlivých tahů je možné postupně vypisovat postup algoritmu.
+
+Řešení tohoto hlavolamu je možné provést prohledáváním stavového prostoru, tzn.
+všech možných pozic kamenů. Jednou takovou možností je použití slepých
+strategií pro prohledávání grafu stavového prostoru (prohledávání do hloubky,
+prohledávání do šířky), nicméně efektivnější strategií, co se týče velikosti
+podmnožiny prohledaných stavů hlavolamu, jsou cílené strategie. Pro tuto úlohu
+je zvolena strategie heuristického prohledávání grafu stavového prostoru s výše
+uvedenou heuristickou funkcí.
+
+Oproti slepým strategiím je výhoda v menším počtu prohledaných stavů, na druhou
+stranu může být nevýhodou složitý výpočet heuristické funkce.
+
 \section{Implementace}
+Protože je zvolená cílená strategie prohledávání, primární datovou strukturou
+není graf ani strom, ale prioritní fronta. V každém kroku algoritmu nás zajímá
+stav hlavolamu s nejnižším ohodnocením. Grafová struktura stavového prostoru je
+tvořena až dodatečně pomocí rodič-potomek ukazatelů. Aby nedocházelo k cyklení
+v případě neexistujícího řešení a omezení zbytečného generování stejných stavů,
+je implementována datová struktura množina, ve které jsou uchovávány
+vygenerované stavy. Nikdy se tedy nestane, že by se stejný stav vygeneroval
+vícekrát.
+
+\subsection{Prioritní fronta}
+I když je velikost zadané úlohy poměrně malá, je prioritní fronta
+implementována jako binární halda, přitom by stačilo použít jednoduchý seznam.
+
+\subsection{Množina}
+Implementace pomocí rozptylové tabulky s řetězením záznamů při kolizi.
+
+Jazyk implementace je dle zadání ANSI C. Je zajištěna správná manipulace s
+pamětí, nedochází k paměťovým únikům a při skončení programu je rovněž čistá
+halda.
+
+
 \section{Uživatelská příručka}
-\section{Řešení úlohy}
+Program je odevzdán jako zip soubor obsahující zdrojové soubory a makefile pro
+přeložení pomocí gcc.
+
+\subsection{Uživatelské módy}
+Bez specifikování jakýchkoliv dobrovolných argumentů je uživateli pouze
+představena posloupnost řešících tahů. Je zde ale možnost podívat se jak je
+generován stavový prostor s možností krokování jednotlivých iterací nebo ne.
+
+
 \section{Závěr}
+Cílem bylo splnit zadání co možná nejpřesněji. 
+
+Překvapením byl nízký počet kroků nutných k nalezení řešení a výsledná krátká
+posloupnost tahů vedoucích k řešení. Program je tedy možná řešen zbytečně
+složitě, nicméně má potenciál být rozšířen na stejnou úlohu o větších
+rozměrech.
+
+Možné vylepšení by bylo zavedení grafického výstupu namísto tisknutí do konzole,
+například formou animace generování stavového grafu.
 
 \end{document}
