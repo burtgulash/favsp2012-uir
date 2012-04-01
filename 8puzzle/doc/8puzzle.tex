@@ -1,7 +1,9 @@
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[czech]{babel}
+\usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{amssymb}
 
 \author{Tomáš Maršálek}
 \title{Semestrální práce z předmětu KIV/UIR}
@@ -16,7 +18,46 @@
 V programovacím jazyce C zpracujte jednoduchý výukový program, který plně
 demonstruje nalezení řešení následující úlohy: Jde o převedení hlavolamu \uv{8}
 (při respektování pořadí aplikace produkčních pravidel uvedeného na přednášce)
-% TODO nějaký pikčůry
+
+\vspace{.3cm}
+
+\begin{center}
+\begin{minipage}[b]{.3\textwidth}
+\centering
+ze stavu \\
+\vspace{.1cm}
+\begin{LARGE}
+\begin{tabular}{|ccc|}
+\hline
+1 &  $\square$ & 3 \\
+6 & 2 & 4 \\
+8 & 7 & 5 \\
+\hline
+\end{tabular}
+\end{LARGE}
+\end{minipage}
+\begin{minipage}[b]{.2\textwidth}
+{\large $R_k$} \\
+$\longrightarrow$
+\end{minipage}
+\begin{minipage}[b]{.3\textwidth}
+\centering
+do stavu \\
+\vspace{.1cm}
+\begin{LARGE}
+\begin{tabular}{|ccc|}
+\hline
+1 & 2 & 3 \\
+8 & $\square$ & 4 \\
+7 & 6 & 5 \\
+\hline
+\end{tabular}
+\end{LARGE}
+\end{minipage}
+\end{center}
+
+\vspace{.3cm}
+
 metodou prohledávání grafu s využitím heuristické funkce
 \begin{align*}
 \hat{f}(n_i)~&=~\hat{g}(n_i) + \hat{h}(n_i) \\
