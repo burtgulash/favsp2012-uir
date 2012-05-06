@@ -1,4 +1,7 @@
 /*
+ * 8puzzle
+ * set.c
+ *
  * @author: Tomáš Maršálek
  * @date: 06.05.2012
  * @version: 1.0

@@ -1,3 +1,12 @@
+/*
+ * 8puzzle
+ * set.h
+ *
+ * @author: Tomáš Maršálek
+ * @date: 06.05.2012
+ * @version: 1.0
+ */
+
 #ifndef SET_H
 #define SET_H
 #include "list.h"
