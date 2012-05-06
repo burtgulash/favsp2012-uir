@@ -13,8 +13,20 @@ static int end[]   = {1, 2, 3,
                       8, 0, 4,
                       7, 6, 5};
 
+static int help = 0;
+static int stepping = 0;
+static int verbose = 0;
+static char *outfile;
 
-int solve(int *start, int *end, int verbose)
+static FILE* output;
+
+#define STEP()                                                                \
+if (stepping && output == stdout) {                                           \
+    printf("Press ENTER to continue...\n");                                   \
+    getchar();                                                                \
+}
+
+static int solve(int *start, int *end)
 {
     Grid *root, *goal, *cur, *child, *iter, **result;
     Pqueue *pq;
@@ -45,12 +57,12 @@ int solve(int *start, int *end, int verbose)
     while (!empty(pq)) {
         cur = pqueue_extract_min(pq);
         if (verbose) {
-            printf("%d.\n", ++i);
-            printf("Depth: %d\n", cur->depth);
-            printf("Grid:\n");
-            grid_print(cur);
-            printf("f: %2d\n", weight(cur));
-            printf("\n");
+            fprintf(output, "%d.\n", ++i);
+            fprintf(output, "Depth: %d\n", cur->depth);
+            fprintf(output, "Grid:\n");
+            grid_print(output, cur);
+            fprintf(output, "f: %2d\n", weight(cur));
+            fprintf(output, "\n");
         }
         if (grid_code(cur) == goal_grid_code)
             break;
@@ -97,10 +109,11 @@ int solve(int *start, int *end, int verbose)
         cur->child[ch] = NULL;
 
         if (verbose) {
-            printf("Children:\n");
-            grid_children(cur);
-            printf("------------------------\n");
-            printf("\n");
+            fprintf(output, "Children:\n");
+            grid_children(output, cur);
+            fprintf(output, "------------------------\n");
+            fprintf(output, "\n");
+            STEP();
         }
     }
 
@@ -118,11 +131,12 @@ int solve(int *start, int *end, int verbose)
         result[i--] = iter;
 
     if (verbose)
-        printf("Solution sequence:\n");
+        fprintf(output, "Solution sequence:\n");
 
     for (i = 0; i < path_length; i++) {
-        grid_print(result[i]);
-        printf("\n");
+        grid_print(output, result[i]);
+        STEP();
+        fprintf(output, "\n");
     }
 
 
@@ -139,15 +153,57 @@ int solve(int *start, int *end, int verbose)
 
 int main(int argc, char **argv)
 {
-    int verbose;
+    int success;
 
-    verbose = 0;
+    success = 0;
+    output = stdout;
+
     while (--argc) {
         argv++;
-        if (argv[0][0] == '-' && argv[0][1] == 'v')
-            verbose = 1;
+        if (**argv == '-') {
+            switch(argv[0][1]) {
+                case 'v':
+                    verbose = 1;
+                    break;
+                case 'h':
+                    help = 1;
+                    break;
+                case 's':
+                    stepping = 1;
+                    break;
+                case 'o':
+                    argv++;
+                    if (--argc)
+                        outfile = *argv;
+                    else
+                        printf("Missing filename.\n");
+                    break;
+                default:
+                    printf("Unknown option: %s\n", *argv);
+            }
+        }
     }
 
+    if (outfile) {
+        output = fopen(outfile, "w");
+        if (output == NULL) {
+            perror("error opening file\n");
+            return EXIT_FAILURE;
+        }
+    }
 
-    return !solve(start, end, verbose);
+    if (help) {
+        printf("Usage: 8puzzle [-h|-s|-v] [-o FILE]\n");
+        printf("\n");
+        printf("\t-h\tHelp.\n");
+        printf("\t-s\tStepping mode.\n");
+        printf("\t-v\tVerbose output.\n");
+        printf("\t-o\tSpecify output file\n");
+        return EXIT_SUCCESS;
+    }
+
+    success = solve(start, end);
+    fclose(output);
+
+    return !success;
 }

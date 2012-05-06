@@ -133,23 +133,23 @@ void grid_move_hole(Grid *grid, int new_pos)
 }
 
 
-void grid_print(Grid *grid)
+void grid_print(FILE* output, Grid *grid)
 {
     int i, j;
 
     for (i = 0; i < 3; i++) {
         for (j = 0; j < 3; j++) {
             if (grid->g[3 * i + j] == 0)
-                printf("  ");
+                fprintf(output, "  ");
             else
-                printf("%d ", grid->g[3 * i + j]);
+                fprintf(output, "%d ", grid->g[3 * i + j]);
         }
-        printf("\n");
+        fprintf(output, "\n");
     }
 }
 
 
-void grid_children(Grid *grid)
+void grid_children(FILE* output, Grid *grid)
 {
     int ch, i, j;
 
@@ -157,16 +157,16 @@ void grid_children(Grid *grid)
         for (ch = 0; grid->child[ch]; ch++) {
             for (j = 0; j < 3; j++) {
                 if (grid->child[ch]->g[3 * i + j] == 0)
-                    printf("  ");
+                    fprintf(output, "  ");
                 else
-                    printf("%d ", grid->child[ch]->g[3 * i + j]);
+                    fprintf(output, "%d ", grid->child[ch]->g[3 * i + j]);
             }
-            printf("   ");
+            fprintf(output, "   ");
         }
-        printf("\n");
+        fprintf(output, "\n");
     }
 
     for (ch = 0; grid->child[ch]; ch++)
-        printf("f: %2d    ", weight(grid->child[ch]));
-    printf("\n");
+        fprintf(output, "f: %2d    ", weight(grid->child[ch]));
+    fprintf(output, "\n");
 }

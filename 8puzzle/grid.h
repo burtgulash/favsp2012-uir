@@ -1,5 +1,6 @@
 #ifndef GRID_H
 #define GRID_H
+#include <stdio.h>
 
 typedef struct _grid {
     int g[9];
@@ -10,8 +11,8 @@ typedef struct _grid {
 } Grid;
 
 void get_correct_positions(Grid *goal);
-void grid_print(Grid *grid);
-void grid_children(Grid *grid);
+void grid_print(FILE* output, Grid *grid);
+void grid_children(FILE* output, Grid *grid);
 void grid_move_hole(Grid *grid, int new_pos);
 Grid *make_child(Grid *grid);
 void grid_dispose(Grid *grid);
