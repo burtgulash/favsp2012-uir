@@ -1,17 +1,21 @@
-\documentclass[11pt]{article}
+\documentclass[12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[czech]{babel}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amssymb}
 
-\author{Tomáš Maršálek}
-\title{Semestrální práce z předmětu KIV/UIR}
-\date{\today}
 
 \begin{document}
 \begin{titlepage}
-\maketitle
+\begin{center}
+	\mbox{} \\[3cm]
+	\huge{Semestrální práce z předmětu KIV/UIR} \\[2.5cm]
+	\Large{Tomáš Maršálek} \\
+	\large{marsalet@students.zcu.cz} \\[1cm]
+	\normalsize{\today}
+\end{center}
+\thispagestyle{empty}
 \end{titlepage}
 
 \section{Zadání}
@@ -102,16 +106,16 @@ je implementována datová struktura množina, ve které jsou uchovávány
 vygenerované stavy. Nikdy se tedy nestane, že by se stejný stav vygeneroval
 vícekrát.
 
+Jazyk implementace je, dle zadání, ANSI C. Je zajištěna správná manipulace s
+pamětí, nedochází k paměťovým únikům a při skončení programu je rovněž čistá
+halda.
+
 \subsection{Prioritní fronta}
 I když je velikost zadané úlohy poměrně malá, je prioritní fronta
 implementována jako binární halda, přitom by stačilo použít jednoduchý seznam.
 
 \subsection{Množina}
 Implementace pomocí rozptylové tabulky s řetězením záznamů při kolizi.
-
-Jazyk implementace je dle zadání ANSI C. Je zajištěna správná manipulace s
-pamětí, nedochází k paměťovým únikům a při skončení programu je rovněž čistá
-halda.
 
 
 \section{Uživatelská příručka}
@@ -123,6 +127,22 @@ Bez specifikování jakýchkoliv dobrovolných argumentů je uživateli pouze
 představena posloupnost řešících tahů. Je zde ale možnost podívat se jak je
 generován stavový prostor s možností krokování jednotlivých iterací nebo ne.
 
+\paragraph{}
+Argument (-h) vypíše do konzole nápovědu a skončí program.
+
+\paragraph{}
+Volitelný verbózní mód (-v) vypisuje číslo iterace, hloubku právě vytaženého
+stavu a všechny dosud neobjevené potomky, které z tohoto stavu vedou dál. Pro
+každý stav je zobrazena hodnota heuristické funkce.
+
+\paragraph{}
+Dalším volitelným módem je krokování (-s), které umožňuje uživateli programu
+krokovat jednotlivé iterace prohledávání v případě, že je zvolen verbózní mód.
+
+\paragraph{}
+Dodatečně je implementována možnost uložení výsledného výpisu do souboru,
+standardně pomocí přepínače (-o) a názvu souboru.
+
 
 \section{Závěr}
 Cílem bylo splnit zadání co možná nejpřesněji. 
@@ -132,7 +152,10 @@ posloupnost tahů vedoucích k řešení. Program je tedy možná řešen zbyte�
 složitě, nicméně má potenciál být rozšířen na stejnou úlohu o větších
 rozměrech.
 
-Možné vylepšení by bylo zavedení grafického výstupu namísto tisknutí do konzole,
-například formou animace generování stavového grafu.
+Jednoduchým rozšířením by byla implementace možnosti zadávat vlastní počáteční
+a konečný stav hlavolamu, nicméně zadání tohle nevyžadovalo.
+
+Možné vylepšení by bylo zavedení grafického výstupu namísto tisknutí do
+konzole, například formou animace generování stavového grafu.
 
 \end{document}
