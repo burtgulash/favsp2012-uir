@@ -1,3 +1,9 @@
+/*
+ * @author: Tomáš Maršálek
+ * @date: 06.05.2012
+ * @version: 1.0
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

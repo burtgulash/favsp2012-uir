@@ -1,3 +1,9 @@
+/*
+ * @author: Tomáš Maršálek
+ * @date: 06.05.2012
+ * @version: 1.0
+ */
+
 #include <stdlib.h>
 
 #include "list.h"
