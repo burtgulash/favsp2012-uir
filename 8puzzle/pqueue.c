@@ -3,7 +3,9 @@
 #include "grid.h"
 #include "pqueue.h"
 
-
+/*
+ * Swaps elements on positions pos1 and pos2.
+ */
 static void swap(Pqueue *pq, int pos1, int pos2)
 {
     Grid *tmp;
@@ -14,6 +16,9 @@ static void swap(Pqueue *pq, int pos1, int pos2)
 }
 
 
+/*
+ * Bubbles element up in the binary heap.
+ */
 static void up(Pqueue *pq, int pos)
 {
     while (pos > 1
@@ -24,6 +29,9 @@ static void up(Pqueue *pq, int pos)
 }
 
 
+/*
+ * Bubbles element down in the binary heap.
+ */
 static void down(Pqueue *pq, int pos)
 {
     int next;
@@ -46,6 +54,7 @@ static void down(Pqueue *pq, int pos)
     }
 }
 
+
 void pqueue_insert(Pqueue *pq, Grid *g)
 {
     if (pq->used >= pq->alloc) {
@@ -57,6 +66,7 @@ void pqueue_insert(Pqueue *pq, Grid *g)
     pq->used++;
     up(pq, pq->used - 1);
 }
+
 
 Grid *pqueue_extract_min(Pqueue *pq)
 {
@@ -70,6 +80,7 @@ Grid *pqueue_extract_min(Pqueue *pq)
 
     return min;
 }
+
 
 int empty(Pqueue *pq)
 {
@@ -89,6 +100,10 @@ Pqueue *pqueue_new()
     return new;
 }
 
+
+/*
+ * Destroy priority queue.
+ */
 void pqueue_dispose(Pqueue *pq)
 {
     free(pq->elems);

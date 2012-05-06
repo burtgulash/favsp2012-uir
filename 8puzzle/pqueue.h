@@ -7,10 +7,29 @@ typedef struct _pqueue {
     Grid **elems;
 } Pqueue;
 
+/*
+ * Emptiness test.
+ */
 int empty(Pqueue *pq);
+
+/*
+ * Priority queue element insertion.
+ */
 void pqueue_insert(Pqueue *pq, Grid *g);
+
+/*
+ * Priority queue retrieve element with minimal weight.
+ */
 Grid *pqueue_extract_min(Pqueue *pq);
+
+/*
+ * Initialize new priority queue.
+ */
 Pqueue *pqueue_new();
+
+/*
+ * Destroy priority queue.
+ */
 void pqueue_dispose(Pqueue *pq);
 
 #endif

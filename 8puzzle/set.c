@@ -7,6 +7,10 @@
 static void copy_over(Set *old, Set *new);
 static void dispose_buckets(Set *s);
 
+
+/*
+ * Copies all elements from old set to new set.
+ */
 static void copy_over(Set *old, Set *new)
 {
     List *l;
@@ -19,6 +23,7 @@ static void copy_over(Set *old, Set *new)
                 set_insert(new, l->position);
     }
 }
+
 
 int set_contains(Set *s, int position)
 {
@@ -33,6 +38,7 @@ int set_contains(Set *s, int position)
 
     return list_contains(list, position);
 }
+
 
 void set_insert(Set *s, int position)
 {
@@ -66,6 +72,7 @@ void set_insert(Set *s, int position)
     }
 }
 
+
 Set *set_new(int size)
 {
     Set *new;
@@ -80,6 +87,7 @@ Set *set_new(int size)
     return new;
 }
 
+
 static void dispose_buckets(Set *s)
 {
     int i;
@@ -90,6 +98,7 @@ static void dispose_buckets(Set *s)
 
     free(s->buckets);
 }
+
 
 void set_dispose(Set *s)
 {

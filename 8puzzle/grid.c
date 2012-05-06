@@ -26,7 +26,6 @@ void get_correct_positions(Grid *goal)
 }
 
 
-/* Get unique id of the grid. */
 int grid_code(Grid *grid)
 {
     int i, code;

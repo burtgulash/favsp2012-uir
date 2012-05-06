@@ -12,6 +12,7 @@ int list_contains(List *l, int position)
     return 0;
 }
 
+
 void list_insert(List *l, int position)
 {
     List *new;
@@ -19,6 +20,7 @@ void list_insert(List *l, int position)
     new = list_new(position, l->next);
     l->next = new;
 }
+
 
 List *list_new(int position, List *next)
 {
@@ -30,6 +32,7 @@ List *list_new(int position, List *next)
 
     return new;
 }
+
 
 void list_dispose(List *l)
 {

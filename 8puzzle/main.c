@@ -13,6 +13,7 @@ static int end[]   = {1, 2, 3,
                       8, 0, 4,
                       7, 6, 5};
 
+/* Program modes. */
 static int help = 0;
 static int stepping = 0;
 static int verbose = 0;
@@ -26,6 +27,10 @@ if (stepping && output == stdout) {                                           \
     getchar();                                                                \
 }
 
+/*
+ * Solves the puzzle and prints results.
+ * Returns 1 on success and 0 on nonexistence of a solution.
+ */
 static int solve(int *start, int *end)
 {
     Grid *root, *goal, *cur, *child, *iter, **result;
