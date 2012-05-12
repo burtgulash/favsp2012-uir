@@ -20,7 +20,7 @@
 
 \section{Zadání}
 V programovacím jazyce C zpracujte jednoduchý výukový program, který plně
-demonstruje nalezení řešení následující úlohy: Jde o převedení hlavolamu \uv{8}
+demonstruje nalezení řešení následující úlohy: Jde o převedení hlavolamu ``8"
 (při respektování pořadí aplikace produkčních pravidel uvedeného na přednášce)
 
 \vspace{.3cm}
@@ -117,10 +117,11 @@ implementována jako binární halda, přitom by stačilo použít jednoduchý s
 \subsection{Množina}
 Implementace pomocí rozptylové tabulky s řetězením záznamů při kolizi.
 
-
+\clearpage
 \section{Uživatelská příručka}
 Program je odevzdán jako zip soubor obsahující zdrojové soubory a makefile pro
 přeložení pomocí gcc.
+
 
 \subsection{Uživatelské módy}
 Bez specifikování jakýchkoliv dobrovolných argumentů je uživateli pouze
@@ -143,6 +144,62 @@ krokovat jednotlivé iterace prohledávání v případě, že je zvolen verbóz
 Dodatečně je implementována možnost uložení výsledného výpisu do souboru,
 standardně pomocí přepínače (-o) a názvu souboru.
 
+\clearpage
+\subsection{Příklad použití}
+Spuštění programu s detailním výpisem vygenerovaných stavů hlavolamu:
+\begin{verbatim}
+./8puzzle -v
+\end{verbatim}
+Ukázka výstupu programu - vygenerované stavy:
+\begin{verbatim}
+2.
+Depth: 1
+Grid:
+1 2 3 
+6   4 
+8 7 5 
+f: 23
+
+Children:
+1 2 3    1 2 3    1 2 3    
+  6 4    6 4      6 7 4    
+8 7 5    8 7 5    8   5    
+f: 21    f: 41    f: 29    
+------------------------
+\end{verbatim}
+Výstup naznačuje, že stav má hloubku 1 od počátečního stavu a hodnotu
+heuristické funkce 23. Počet potomků je tři, přestože z prostředního stavu lze
+jít čtyřmi směry. Poslední stav byl ale objeven již dříve, proto není
+vygenerován vícekrát.
+
+\clearpage
+\noindent
+Ukázka výstupu programu - posloupnost stavů vedoucích k řešení:
+\begin{verbatim}
+1   3 
+6 2 4 
+8 7 5 
+
+1 2 3 
+6   4 
+8 7 5 
+
+1 2 3 
+  6 4 
+8 7 5 
+
+1 2 3 
+8 6 4 
+  7 5 
+
+1 2 3 
+8 6 4 
+7   5 
+
+1 2 3 
+8   4 
+7 6 5
+\end{verbatim}
 
 \section{Závěr}
 Cílem bylo splnit zadání co možná nejpřesněji. 
