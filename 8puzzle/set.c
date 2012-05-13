@@ -91,7 +91,7 @@ Set *set_new(int size)
     new = (Set*) malloc(sizeof(Set));
     new->num_elems = 0;
     new->size = size;
-    new->buckets = (List**) malloc(new->size * sizeof(List*));
+    new->buckets = (List**) calloc(new->size, sizeof(List*));
 
     return new;
 }
